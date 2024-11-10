@@ -1,14 +1,14 @@
 package service
 
 import (
-	"github.com/GreysonCarlos/Topic-web/repository"
 	"os"
 	"testing"
+	"github.com/GreysonCarlos/Topic-web/repository"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestMain(m *testing.M) {
-	repository.Init("ginweb/data/")
+	repository.Init("../data/")
 	os.Exit(m.Run())
 }
 
