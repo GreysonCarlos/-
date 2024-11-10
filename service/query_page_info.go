@@ -24,7 +24,7 @@ func NewQueryPageInfoFlow(topidId int64) *QueryPageInfoFlow {
 
 type QueryPageInfoFlow struct {
 	topicId		int64
-	pageinfo	*PageInfo
+	pageInfo	*PageInfo
 
 	topic		*repository.Topic
 	posts		[]*repository.Post
@@ -41,7 +41,7 @@ func (f *QueryPageInfoFlow) Do() (*PageInfo, error) {
 	if err := f.packPageInfo(); err != nil {
 		return nil, err
 	}
-	return f.pageinfo, nil
+	return f.pageInfo, nil
 }
 
 // 检查topicId
@@ -72,7 +72,7 @@ func (f *QueryPageInfoFlow) prepareInfo() error {
 }
 
 func (f *QueryPageInfoFlow) packPageInfo() error {
-	f.pageinfo = &PageInfo{
+	f.pageInfo = &PageInfo{
 			Topic: f.topic, 
 			PostList: f.posts,
 		}
