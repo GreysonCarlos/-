@@ -15,7 +15,7 @@ func PublishPost(topicIdStr, content string) *PageData{
 		}
 	}
 	return &PageData{
-			Code: 1,
+			Code: 0,
 			Msg: "success",
 			Data: map[string]int64{
 					"post_id": postId,
