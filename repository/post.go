@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"encoding/json"
+	"os"
 	"sync"
 )
 
@@ -32,4 +34,30 @@ func NewPostDaoInstance() *PostDao {
 // 根据话题ID查询回帖列表
 func (*PostDao) QueryPostByParentId(parentId int64) []*Post {
 	return postIndexMap[parentId]
+}
+
+// 添加回帖功能
+func (*PostDao) InsertPost(post *Post) error {
+	f, err := os.OpenFile("../data/post", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	if err != nil {
+		return err
+	}
+
+	defer f.Close()
+	marshal, _ := json.Marshal(post)
+	if _, err = f.WriteString(string(marshal)); err != nil {
+		return err
+	}
+
+	rwMutex.Lock()
+	postlist, ok := postIndexMap[post.ParentId]
+	// 插入帖子
+	if !ok {
+		postIndexMap[post.ParentId] = []*Post{post}
+	} else {
+		postlist = append(postlist, post)
+		postIndexMap[post.ParentId] = postlist
+	}
+	rwMutex.Unlock()
+	return nil
 }
