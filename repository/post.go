@@ -38,14 +38,14 @@ func (*PostDao) QueryPostByParentId(parentId int64) []*Post {
 
 // 添加回帖功能
 func (*PostDao) InsertPost(post *Post) error {
-	f, err := os.OpenFile("../data/post", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	f, err := os.OpenFile("./data/post", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	if err != nil {
 		return err
 	}
 
 	defer f.Close()
 	marshal, _ := json.Marshal(post)
-	if _, err = f.WriteString(string(marshal)); err != nil {
+	if _, err = f.WriteString(string(marshal)+"\n"); err != nil {
 		return err
 	}
 
