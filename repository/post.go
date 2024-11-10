@@ -2,14 +2,13 @@ package repository
 
 import (
 	"sync"
-	"time"
 )
 
 type Post struct {
 	Id				int64		`json:"id"`
 	ParentId		int64		`json:"parent_id"`
 	Content		 	string		`json:"content"`
-	CreateTime 		time.Time	`json:"create_time"`	
+	CreateTime 		int64		`json:"create_time"`	
 }
 
 func (Post) TableName() string {
