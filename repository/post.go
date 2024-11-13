@@ -55,7 +55,7 @@ func (*PostDao) InsertPost(post *Post) error {
 	if !ok {
 		postIndexMap[post.ParentId] = []*Post{post}
 	} else {
-		postlist = append(postlist, post)
+		// postlist = append(postlist, post)
 		postIndexMap[post.ParentId] = postlist
 	}
 	rwMutex.Unlock()
