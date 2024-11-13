@@ -61,7 +61,7 @@ func initPostIndexMap(filePath string) error {
 			PostTmpMap[post.ParentId] = []*Post{&post}
 			continue
 		}
-		posts = append(posts, &post)
+		// posts = append(posts, &post)
 		PostTmpMap[post.ParentId] = posts
 	}
 	postIndexMap = PostTmpMap
